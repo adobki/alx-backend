@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """This module showcases i18n using a Flask API"""
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 class Config(object):
@@ -20,7 +20,7 @@ babel = Babel(app)
 app.config.from_object(Config)
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def home() -> str:
     """Default route/homepage"""
     return render_template('3-index.html')

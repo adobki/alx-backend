@@ -1,23 +1,18 @@
 #!/usr/bin/env python3
 """This module showcases i18n using a Flask API"""
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 class Config(object):
     """Configuration options for app and babel"""
+    # Available options
     LANGUAGES = ['en', 'fr']
     TIMEZONES = ['UTC', 'GMT']
 
-    @property
-    def GET_LANG(self) -> str:
-        """Selects first language as config language"""
-        return Config.LANGUAGES[0]
-
-    @property
-    def GET_TZ(self) -> str:
-        """Selects first timezone as config timezone"""
-        return Config.TIMEZONES[0]
+    # Defaults
+    BABEL_DEFAULT_LOCALE = LANGUAGES[0]
+    BABEL_DEFAULT_TIMEZONE = TIMEZONES[0]
 
 
 app = Flask(__name__)
@@ -25,12 +20,10 @@ babel = Babel(app)
 app.config.from_object(Config)
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def home() -> str:
     """Default route/homepage"""
-    return render_template('4-index.html',
-                           home_title=_('home_title'),
-                           home_header=_('home_header'))
+    return render_template('4-index.html')
 
 
 @babel.localeselector

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """This module showcases i18n using a Flask API"""
 import flask
+from datetime import datetime
 from flask import Flask, render_template, request
-from flask_babel import _, Babel
+from flask_babel import _, Babel, format_datetime
 from pytz import timezone
 from pytz.exceptions import UnknownTimeZoneError
 from typing import Union
@@ -34,12 +35,17 @@ def before_request() -> None:
     else:
         flask.g.welcome = _('not_logged_in')
 
+    # Set timezone based on selected preference or default
+    time = format_datetime(datetime.now(tz=timezone(get_timezone())))
+    flask.g.time = _('current_time_is', current_time=time)
+
 
 @app.route('/')
 def home() -> str:
     """Default route/homepage"""
-    return render_template('7-index.html',
-                           welcome_message=flask.g.welcome)
+    return render_template('index.html',
+                           welcome_message=flask.g.welcome,
+                           current_time_is=flask.g.time)
 
 
 @babel.localeselector
@@ -80,6 +86,7 @@ users = {
     2: {'name': 'Beyonce', 'locale': 'en', 'timezone': 'US/Central'},
     3: {'name': 'Spock', 'locale': 'kg', 'timezone': 'Vulcan'},
     4: {'name': 'Teletubby', 'locale': None, 'timezone': 'Europe/London'},
+    5: {'name': 'Donald', 'locale': 'fr', 'timezone': 'Africa/Lagos'},
 }
 
 
