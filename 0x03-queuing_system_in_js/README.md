@@ -1,4 +1,4 @@
-# ___0x0.Queuing System in JS___
+# ___0x03.Queuing System in JS___
 This folder contains my submissions for the tasks in the project named ___[0x03.Queuing System in JS](https://intranet.alxswe.com/projects/1245).___ The project was an introduction to Redis in Node.js.
 
 ## Technologies Used

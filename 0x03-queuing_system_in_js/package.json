@@ -1,4 +1,5 @@
 {
+    "type": "module",
     "name": "queuing_system_in_js",
     "version": "1.0.0",
     "description": "Introduction to job queuing in ES6 with Redis and Kue.",
